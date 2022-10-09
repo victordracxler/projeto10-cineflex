@@ -18,6 +18,8 @@ export default function ChooseSeatsPage() {
     darkGray,
   } = CORES;
   const [selected, setSelected] = useState([]);
+  const [name, setName] = useState("");
+  const [cpf, setCpf] = useState("");
 
   useEffect(() => {
     const url = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${params.idSessao}/seats`;
@@ -59,7 +61,7 @@ export default function ChooseSeatsPage() {
 
   function RenderSeat(seat) {
     const { id, name, isAvailable } = seat;
-    const isSelected = (selected.includes(id))
+    const isSelected = selected.includes(id);
 
     if (isAvailable === false) {
       return (
@@ -79,6 +81,23 @@ export default function ChooseSeatsPage() {
         {name}
       </SeatBttn>
     );
+  }
+
+  function ReserveSeats(event) {
+    event.preventDefault()
+
+    const url = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many"
+    const body = {
+        ids: selected,
+        name: name,
+        cpf: cpf
+    }
+
+    const request = axios.post(url, body)
+
+    request.then((res) => console.log(res.data))
+    request.catch((err) => console.log(err.response.data))
+
   }
 
   return (
@@ -101,12 +120,27 @@ export default function ChooseSeatsPage() {
         </div>
       </LegendContainer>
 
-      <BuyerForm>
+      <BuyerForm onSubmit={ReserveSeats}>
         <label htmlFor="buyerName">Nome do comprador:</label>
-        <input type="text" id="buyerName" placeholder="Digite seu nome..." />
+        <input
+          type="text"
+          id="buyerName"
+          placeholder="Digite seu nome..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
         <label htmlFor="buyerCPF">CPF do comprador:</label>
-        <input type="text" id="buyerCPF" placeholder="Digite seu CPF..." />
+        <input
+          type="text"
+          id="buyerCPF"
+          placeholder="Digite seu CPF..."
+          value={cpf}
+          onChange={(e) => setCpf(e.target.value)}
+          minLength="11"
+          required
+        />
 
         <button type="submit">Reservar assento(s)</button>
       </BuyerForm>
