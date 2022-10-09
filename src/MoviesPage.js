@@ -1,15 +1,27 @@
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FILMES from "./mock";
 import MovieCard from "./MovieCard";
 
-export default function MoviesPage(params) {
+export default function MoviesPage() {
+
+    const [movieList, setMovieList] = useState([])
+
+    useEffect(() => {
+        const url = "https://mock-api.driven.com.br/api/v5/cineflex/movies"
+        const promise = axios.get(url)
+
+        promise.then(res => setMovieList(res.data))
+        promise.catch(err => console.log(err.response.data))
+    }, [])
+
+
   return (
     <>
       <SelectTitle>Selecione o filme</SelectTitle>
-      <CardsContainer>{FILMES.map((movie) => MovieCard(movie))}</CardsContainer>
+      <CardsContainer>{movieList.map((movie) => MovieCard(movie))}</CardsContainer>
     </>
   );
 }
