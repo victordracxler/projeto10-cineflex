@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import FILMES from "./mock";
 import MovieCard from "./MovieCard";
 
 export default function MoviesPage() {
