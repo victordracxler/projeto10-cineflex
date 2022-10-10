@@ -4,23 +4,22 @@ import styled from "styled-components";
 import MovieCard from "./MovieCard";
 
 export default function MoviesPage() {
+  const [movieList, setMovieList] = useState([]);
 
-    const [movieList, setMovieList] = useState([])
-    
+  useEffect(() => {
+    const url = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
+    const promise = axios.get(url);
 
-    useEffect(() => {
-        const url = "https://mock-api.driven.com.br/api/v5/cineflex/movies"
-        const promise = axios.get(url)
-
-        promise.then(res => setMovieList(res.data))
-        promise.catch(err => console.log(err.response.data))
-    }, [])
-
+    promise.then((res) => setMovieList(res.data));
+    promise.catch((err) => console.log(err.response.data));
+  }, []);
 
   return (
     <>
       <SelectTitle>Selecione o filme</SelectTitle>
-      <CardsContainer>{movieList.map((movie) => MovieCard(movie))}</CardsContainer>
+      <CardsContainer>
+        {movieList.map((movie) => MovieCard(movie))}
+      </CardsContainer>
     </>
   );
 }
@@ -36,7 +35,6 @@ const SelectTitle = styled.h1`
   justify-content: center;
   align-items: center;
   color: #293845;
-
 `;
 
 const CardsContainer = styled.ul`

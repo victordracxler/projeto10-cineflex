@@ -1,15 +1,14 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
 export default function MovieCard(movie) {
   const { id, posterURL, title } = movie;
 
   return (
     <Link to={`/sessoes/${id}`}>
-    <Card data-identifier="movie-outdoor" key={id} id={id}>
-      <img src={posterURL} alt={title} />
-    </Card>
+      <Card data-identifier="movie-outdoor" key={id} id={id}>
+        <img src={posterURL} alt={title} />
+      </Card>
     </Link>
   );
 }

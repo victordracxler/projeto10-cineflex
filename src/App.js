@@ -8,21 +8,17 @@ import NavBar from "./NavBar";
 import SessionPage from "./SessionPage";
 import SuccessPage from "./SuccessPage";
 
-
 export default function App() {
-    
-
-    return(
-        <BrowserRouter>
-            <GlobalStyle/>
-            <NavBar/>
-            <Routes>
-                <Route path="/" element={<MoviesPage />} />
-                <Route path="/sessoes/:idFilme" element={<SessionPage/>} />
-                <Route path="/assentos/:idSessao" element={<ChooseSeatsPage />} />
-                <Route path="/sucesso" element={<SuccessPage />} />
-            </Routes>
-                
-        </BrowserRouter>
-    )
-};
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<MoviesPage />} />
+        <Route path="/sessoes/:idFilme" element={<SessionPage />} />
+        <Route path="/assentos/:idSessao" element={<ChooseSeatsPage />} />
+        <Route path="/sucesso" element={<SuccessPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}

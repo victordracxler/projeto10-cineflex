@@ -4,14 +4,13 @@ import styled from "styled-components";
 export default function SessionCard(day) {
   const { date, id, weekday, showtimes } = day;
 
-  
   function TimeButton(time) {
     const { name, id } = time;
 
     return (
-        <Link to={`/assentos/${id}`}>
+      <Link to={`/assentos/${id}`}>
         <button data-identifier="hour-minute-btn">{name}</button>
-        </Link>
+      </Link>
     );
   }
 
@@ -26,7 +25,7 @@ export default function SessionCard(day) {
 }
 
 const SessionRow = styled.li`
-    margin: 0 0 24px 24px;
+  margin: 0 0 24px 24px;
 
   h2 {
     font-family: "Roboto";

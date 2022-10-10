@@ -4,17 +4,17 @@ import styled from "styled-components";
 export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {pathname} = location
+  const { pathname } = location;
 
   return (
     <Barra>
-      {pathname !== '/' &&
-      <ion-icon
-        onClick={() => navigate(-1)}
-        name="arrow-back-outline"
-      ></ion-icon>
-      }
-      
+      {pathname !== "/" && (
+        <ion-icon
+          onClick={() => navigate(-1)}
+          name="arrow-back-outline"
+        ></ion-icon>
+      )}
+
       <Link to={`/`} style={{ textDecoration: "none" }}>
         <h1>CINEFLEX</h1>
       </Link>
