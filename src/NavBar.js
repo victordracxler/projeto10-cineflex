@@ -1,12 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function NavBar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {pathname} = location
+  console.log("location", pathname);
+
   return (
     <Barra>
-      <ion-icon name="arrow-back-outline"></ion-icon>
-      <Link to={`/`} style={{ textDecoration: 'none' }}>
-      <h1>CINEFLEX</h1>
+      {pathname !== '/' &&
+      <ion-icon
+        onClick={() => navigate(-1)}
+        name="arrow-back-outline"
+      ></ion-icon>
+      }
+      
+      <Link to={`/`} style={{ textDecoration: "none" }}>
+        <h1>CINEFLEX</h1>
       </Link>
     </Barra>
   );
@@ -35,7 +46,10 @@ const Barra = styled.div`
     color: #e8833a;
   }
 
-  ion-icon{
-    position: relative
+  ion-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 26px;
+    color: #e8833a;
   }
 `;

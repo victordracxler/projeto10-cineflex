@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
 
 export default function MoviesPage() {
 
     const [movieList, setMovieList] = useState([])
+    
 
     useEffect(() => {
         const url = "https://mock-api.driven.com.br/api/v5/cineflex/movies"
