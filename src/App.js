@@ -20,7 +20,7 @@ export default function App() {
                 <Route path="/" element={<MoviesPage />} />
                 <Route path="/sessoes/:idFilme" element={<SessionPage/>} />
                 <Route path="/assentos/:idSessao" element={<ChooseSeatsPage />} />
-                <Route path="/sucesso" render={(props) => <SuccessPage />} />
+                <Route path="/sucesso" element={<SuccessPage />} />
             </Routes>
                 
         </BrowserRouter>

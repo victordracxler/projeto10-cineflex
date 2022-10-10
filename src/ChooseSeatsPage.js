@@ -20,8 +20,10 @@ export default function ChooseSeatsPage() {
     darkGray,
   } = CORES;
   const [selected, setSelected] = useState([]);
+  const [seatNum, setSeatNum] = useState([])
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const url = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${params.idSessao}/seats`;
@@ -35,6 +37,7 @@ export default function ChooseSeatsPage() {
         time: res.data.name,
         title: res.data.movie.title,
         posterURL: res.data.movie.posterURL,
+        date: res.data.day.date
       });
     });
     promise.catch((err) => console.log(err.response.data));
@@ -50,11 +53,19 @@ export default function ChooseSeatsPage() {
     if (!selected.includes(id)) {
       const arr = [...selected, id];
       setSelected(arr);
+
+      const arr2 = [...seatNum, name];
+      setSeatNum(arr2);
+
     } else {
       const index = selected.indexOf(id);
       const arr = [...selected];
       arr.splice(index, 1);
       setSelected(arr);
+
+      const arr2 = [...seatNum];
+      arr2.splice(index, 1);
+      setSeatNum(arr2);
     }
   }
 
@@ -94,7 +105,15 @@ export default function ChooseSeatsPage() {
 
     const request = axios.post(url, body)
 
-    request.then((res) => {console.log(res.data)})
+    request.then((res) => {
+      console.log(res.data)
+      navigate('/sucesso',{state:{
+        name: name,
+        cpf: cpf,
+        sessionInfo: sessionInfo,
+        seats:{ids: selected, nums: seatNum}
+      }})
+    })
     request.catch((err) => console.log(err.response.data))
 
   }
