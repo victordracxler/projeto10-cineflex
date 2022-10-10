@@ -10,7 +10,7 @@ export default function SuccessPage() {
     cpf,
     name,
     seats: { nums },
-    sessionInfo: { day, time, title, date },
+    sessionInfo: {time, title, date },
   } = location.state;
 
   return (

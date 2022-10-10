@@ -5,11 +5,17 @@ export default function Footer(props) {
 
   return (
     <FooterContainer>
-      <img src={posterURL} alt={title} data-identifier="movie-img-preview"/>
-      <div data-identifier="movie-and-session-infos-preview">
-        <h1>{title}</h1>
-        {day != undefined && (<h1>{day} - {time}</h1>)}
-      </div>
+      <img src={posterURL} alt={title} data-identifier="movie-img-preview" />
+
+      <h1 data-identifier="movie-and-session-infos-preview">
+        <span>{title}</span>
+        {day != undefined && (
+          <span>
+            <br></br>
+            {day} - {time}
+          </span>
+        )}
+      </h1>
     </FooterContainer>
   );
 }
@@ -24,7 +30,7 @@ const FooterContainer = styled.div`
 
   background-color: #dfe6ed;
   border-top: 1px solid #9eadba;
-  padding: 14px 10px;
+  padding: 0 10px;
 
   display: flex;
   align-items: center;
@@ -43,7 +49,7 @@ const FooterContainer = styled.div`
     font-weight: 400;
     line-height: 30px;
     text-align: left;
-    height: 40px;
+    height: auto;
     color: #293845;
   }
 `;

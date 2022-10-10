@@ -5,35 +5,31 @@ import styled from "styled-components";
 import Footer from "./Footer";
 import SessionCard from "./SessionCard";
 
-
-
 export default function SessionPage() {
-    const params = useParams()
-    const [sessions, setSessions] = useState([])
-    const idMovie = params.idFilme
+  const params = useParams();
+  const [sessions, setSessions] = useState([]);
+  const idMovie = params.idFilme;
 
-    useEffect(() =>{
-        const url = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`
+  useEffect(() => {
+    const url = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`;
 
-        const promise = axios.get(url)
+    const promise = axios.get(url);
 
-        promise.then(res => setSessions(res.data))
-        promise.catch(err => console.log(err.response.data))
-    }, [])
-    
-    console.log(sessions)
-    return(
-        <>
-        <SelectTitle>
-            Selecione o horário
-        </SelectTitle>
-        <ul>
-            {(sessions.length != 0) && sessions.days.map(day => SessionCard(day))}
-        </ul>
-        <Footer title={sessions.title} posterURL={sessions.posterURL}/>
-        </>
-    )
-};
+    promise.then((res) => setSessions(res.data));
+    promise.catch((err) => console.log(err.response.data));
+  }, []);
+
+  console.log(sessions);
+  return (
+    <>
+      <SelectTitle>Selecione o horário</SelectTitle>
+      <ul>
+        {sessions.length != 0 && sessions.days.map((day) => SessionCard(day))}
+      </ul>
+      <Footer title={sessions.title} posterURL={sessions.posterURL} />
+    </>
+  );
+}
 
 const SelectTitle = styled.h1`
   height: 110px;
@@ -46,5 +42,8 @@ const SelectTitle = styled.h1`
   justify-content: center;
   align-items: center;
   color: #293845;
+`;
 
+const SessionContainer = styled.ul`
+  margin-bottom: 117px;
 `;
