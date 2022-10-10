@@ -74,6 +74,7 @@ export default function ChooseSeatsPage() {
       return (
         <SeatBttn
           data-identifier="seat"
+          onClick={() => alert("Esse assento não está disponível")}
           key={id}
           light={lightYellow}
           dark={darkYellow}
