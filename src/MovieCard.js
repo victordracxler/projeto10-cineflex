@@ -7,7 +7,7 @@ export default function MovieCard(movie) {
 
   return (
     <Link to={`/sessoes/${id}`}>
-    <Card key={id} id={id}>
+    <Card data-identifier="movie-outdoor" key={id} id={id}>
       <img src={posterURL} alt={title} />
     </Card>
     </Link>

@@ -5,8 +5,8 @@ export default function Footer(props) {
 
   return (
     <FooterContainer>
-      <img src={posterURL} alt={title} />
-      <div>
+      <img src={posterURL} alt={title} data-identifier="movie-img-preview"/>
+      <div data-identifier="movie-and-session-infos-preview">
         <h1>{title}</h1>
         {day != undefined && (<h1>{day} - {time}</h1>)}
       </div>

@@ -6,7 +6,6 @@ import Footer from "./Footer";
 import CORES from "./mock";
 import { Link } from "react-router-dom";
 
-
 export default function ChooseSeatsPage() {
   const params = useParams();
   const [seats, setSeats] = useState([]);
@@ -20,10 +19,10 @@ export default function ChooseSeatsPage() {
     darkGray,
   } = CORES;
   const [selected, setSelected] = useState([]);
-  const [seatNum, setSeatNum] = useState([])
+  const [seatNum, setSeatNum] = useState([]);
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${params.idSessao}/seats`;
@@ -37,12 +36,11 @@ export default function ChooseSeatsPage() {
         time: res.data.name,
         title: res.data.movie.title,
         posterURL: res.data.movie.posterURL,
-        date: res.data.day.date
+        date: res.data.day.date,
       });
     });
     promise.catch((err) => console.log(err.response.data));
   }, []);
-
 
   function HandleSeatClick(seat) {
     const { id, name, isAvailable } = seat;
@@ -56,7 +54,6 @@ export default function ChooseSeatsPage() {
 
       const arr2 = [...seatNum, name];
       setSeatNum(arr2);
-
     } else {
       const index = selected.indexOf(id);
       const arr = [...selected];
@@ -75,7 +72,12 @@ export default function ChooseSeatsPage() {
 
     if (isAvailable === false) {
       return (
-        <SeatBttn key={id} light={lightYellow} dark={darkYellow}>
+        <SeatBttn
+          data-identifier="seat"
+          key={id}
+          light={lightYellow}
+          dark={darkYellow}
+        >
           {name}
         </SeatBttn>
       );
@@ -83,6 +85,7 @@ export default function ChooseSeatsPage() {
 
     return (
       <SeatBttn
+        data-identifier="seat"
         onClick={() => HandleSeatClick(seat)}
         key={id}
         light={isSelected ? lightGreen : lightGray}
@@ -94,28 +97,30 @@ export default function ChooseSeatsPage() {
   }
 
   function ReserveSeats(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const url = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many"
+    const url =
+      "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many";
     const body = {
-        ids: selected,
-        name: name,
-        cpf: cpf
-    }
+      ids: selected,
+      name: name,
+      cpf: cpf,
+    };
 
-    const request = axios.post(url, body)
+    const request = axios.post(url, body);
 
     request.then((res) => {
-      console.log(res.data)
-      navigate('/sucesso',{state:{
-        name: name,
-        cpf: cpf,
-        sessionInfo: sessionInfo,
-        seats:{ids: selected, nums: seatNum}
-      }})
-    })
-    request.catch((err) => console.log(err.response.data))
-
+      console.log(res.data);
+      navigate("/sucesso", {
+        state: {
+          name: name,
+          cpf: cpf,
+          sessionInfo: sessionInfo,
+          seats: { ids: selected, nums: seatNum },
+        },
+      });
+    });
+    request.catch((err) => console.log(err.response.data));
   }
 
   return (
@@ -125,15 +130,27 @@ export default function ChooseSeatsPage() {
 
       <LegendContainer>
         <div>
-          <LegendBttn light={lightGreen} dark={darkGreen}></LegendBttn>
+          <LegendBttn
+            data-identifier="seat-selected-subtitle"
+            light={lightGreen}
+            dark={darkGreen}
+          ></LegendBttn>
           <p>Selecionado</p>
         </div>
         <div>
-          <LegendBttn light={lightGray} dark={darkGray}></LegendBttn>
+          <LegendBttn
+            data-identifier="seat-available-subtitle"
+            light={lightGray}
+            dark={darkGray}
+          ></LegendBttn>
           <p>Disponível</p>
         </div>
         <div>
-          <LegendBttn light={lightYellow} dark={darkYellow}></LegendBttn>
+          <LegendBttn
+            data-identifier="seat-unavailable-subtitle"
+            light={lightYellow}
+            dark={darkYellow}
+          ></LegendBttn>
           <p>Indisponível</p>
         </div>
       </LegendContainer>
@@ -141,6 +158,7 @@ export default function ChooseSeatsPage() {
       <BuyerForm onSubmit={ReserveSeats}>
         <label htmlFor="buyerName">Nome do comprador:</label>
         <input
+          data-identifier="buyer-name-input"
           type="text"
           id="buyerName"
           placeholder="Digite seu nome..."
@@ -151,6 +169,7 @@ export default function ChooseSeatsPage() {
 
         <label htmlFor="buyerCPF">CPF do comprador:</label>
         <input
+          data-identifier="buyer-cpf-input"
           type="text"
           id="buyerCPF"
           placeholder="Digite seu CPF..."
@@ -160,9 +179,9 @@ export default function ChooseSeatsPage() {
           required
         />
 
-        
-        <button type="submit">Reservar assento(s)</button>
-        
+        <button data-identifier="reservation-btn" type="submit">
+          Reservar assento(s)
+        </button>
       </BuyerForm>
 
       <Footer

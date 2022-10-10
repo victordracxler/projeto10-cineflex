@@ -10,14 +10,14 @@ export default function SessionCard(day) {
 
     return (
         <Link to={`/assentos/${id}`}>
-        <button>{name}</button>
+        <button data-identifier="hour-minute-btn">{name}</button>
         </Link>
     );
   }
 
   return (
     <SessionRow key={id}>
-      <h2>
+      <h2 data-identifier="session-date">
         {weekday} - {date}
       </h2>
       <div>{showtimes.map((time) => TimeButton(time))}</div>

@@ -18,8 +18,8 @@ export default function SuccessPage() {
       <SelectTitle>Pedido feito com sucesso!</SelectTitle>
       <InfoRow>
         <h1>Filme e sessão</h1>
-        <p>{title}</p>
-        <p>
+        <p data-identifier="movie-session-infos-reserve-finished">{title}</p>
+        <p data-identifier="movie-session-infos-reserve-finished">
           {date} {time}
         </p>
       </InfoRow>
@@ -27,18 +27,22 @@ export default function SuccessPage() {
       <InfoRow>
         <h1>Ingressos</h1>
         {nums.map((num) => (
-          <p>Assento {num}</p>
+          <p data-identifier="seat-infos-reserve-finished">Assento {num}</p>
         ))}
       </InfoRow>
 
       <InfoRow>
         <h1>Comprador</h1>
-        <p>Nome: {name}</p>
-        <p>CPF: {cpf}</p>
+        <p data-identifier="buyer-infos-reserve-finished">Nome: {name}</p>
+        <p data-identifier="buyer-infos-reserve-finished">CPF: {cpf}</p>
       </InfoRow>
 
-      
-      <BackBttn onClick={() => navigate('/')}>Voltar para Home</BackBttn>
+      <BackBttn
+        data-identifier="back-to-home-btn"
+        onClick={() => navigate("/")}
+      >
+        Voltar para Home
+      </BackBttn>
     </ScreenContainer>
   );
 }
@@ -96,4 +100,4 @@ const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
