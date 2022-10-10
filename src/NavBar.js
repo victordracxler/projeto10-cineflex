@@ -4,6 +4,7 @@ import styled from "styled-components";
 export default function NavBar() {
   return (
     <Barra>
+      <ion-icon name="arrow-back-outline"></ion-icon>
       <Link to={`/`} style={{ textDecoration: 'none' }}>
       <h1>CINEFLEX</h1>
       </Link>
@@ -32,5 +33,9 @@ const Barra = styled.div`
     letter-spacing: 0em;
     text-align: center;
     color: #e8833a;
+  }
+
+  ion-icon{
+    position: relative
   }
 `;

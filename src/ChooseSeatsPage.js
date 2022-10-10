@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./Footer";
 import CORES from "./mock";
+import { Link } from "react-router-dom";
+
 
 export default function ChooseSeatsPage() {
   const params = useParams();
@@ -38,7 +40,6 @@ export default function ChooseSeatsPage() {
     promise.catch((err) => console.log(err.response.data));
   }, []);
 
-  //   console.log(seats);
 
   function HandleSeatClick(seat) {
     const { id, name, isAvailable } = seat;
@@ -49,13 +50,11 @@ export default function ChooseSeatsPage() {
     if (!selected.includes(id)) {
       const arr = [...selected, id];
       setSelected(arr);
-      console.log(arr);
     } else {
       const index = selected.indexOf(id);
       const arr = [...selected];
       arr.splice(index, 1);
       setSelected(arr);
-      console.log(arr);
     }
   }
 
@@ -95,7 +94,7 @@ export default function ChooseSeatsPage() {
 
     const request = axios.post(url, body)
 
-    request.then((res) => console.log(res.data))
+    request.then((res) => {console.log(res.data)})
     request.catch((err) => console.log(err.response.data))
 
   }
@@ -142,7 +141,9 @@ export default function ChooseSeatsPage() {
           required
         />
 
+        
         <button type="submit">Reservar assento(s)</button>
+        
       </BuyerForm>
 
       <Footer
