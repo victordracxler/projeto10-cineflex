@@ -19,7 +19,6 @@ export default function SessionPage() {
     promise.catch((err) => console.log(err.response.data));
   }, []);
 
-  console.log(sessions);
   return (
     <>
       <SelectTitle>Selecione o horário</SelectTitle>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export default function SuccessPage() {
   const location = useLocation();
-  console.log("location", location);
   const navigate = useNavigate();
 
   const {

@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./Footer";
 import CORES from "./mock";
-import { Link } from "react-router-dom";
 
 export default function ChooseSeatsPage() {
   const params = useParams();
@@ -111,7 +110,6 @@ export default function ChooseSeatsPage() {
     const request = axios.post(url, body);
 
     request.then((res) => {
-      console.log(res.data);
       navigate("/sucesso", {
         state: {
           name: name,

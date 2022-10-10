@@ -5,7 +5,6 @@ export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const {pathname} = location
-  console.log("location", pathname);
 
   return (
     <Barra>
